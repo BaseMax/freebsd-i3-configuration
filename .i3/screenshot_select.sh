@@ -1,0 +1,1 @@
+scrot --note "-f '/usr/local/share/fonts/TTF/Vazir-Light-FD/10' -x 10 -y 10 -c 0,0,0,255 -t 'Max Base'" --line style=dash,width=3,color="red" --select '/tmp/%F_%T_$wx$h.png' -e 'xclip -selection clipboard -target image/png -i $f'
