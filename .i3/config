@@ -1,0 +1,250 @@
+# i3wm config file (~/.i3/config)
+
+
+# Mod (Super)
+set $mod Mod4
+
+
+# Font
+font pango:Vazir 10
+
+# Work spaces VAR
+#  set $workspace1 "1: Chat "
+#  set $workspace2 "2: Browser "
+#  set $workspace3 "3: Coding "
+#  set $workspace4 "4: FileManager "
+#  set $workspace5 "5: VM  "
+#  set $workspace6 "6: Media "
+  set $workspace1 "1: Main"
+  set $workspace2 "2: Chat"
+  set $workspace3 "3: Browser"
+  set $workspace4 "4: Programming"
+  set $workspace5 "5: File Manager"
+  set $workspace6 "6: Virtual Machines"
+  set $workspace7 "7: Media"
+  set $workspace8 "8: File Server"
+  set $workspace9 "9: Server"
+  set $workspace10 "10"
+
+
+
+assign [class="FileZilla"] $workspace8
+assign [class="filezilla"] $workspace8
+assign [class="fileZilla"] $workspace8
+assign [class="Filezilla"] $workspace8
+# Programs run as which Workspace
+assign [class="Telegram"] $workspace2
+assign [class="firefox"] $workspace3
+assign [class="Chromium"] $workspace3
+assign [class="Sublime Text"] $workspace4
+assign [class="Subl3"] $workspace4
+assign [class="Spyder"] $workspace4
+assign [class="Pcmanfm"] $workspace5
+assign [class="Thunar"] $workspace5
+assign [class="VirtualBox"] $workspace6
+assign [class="Vlc"] $workspace7
+assign [class="vlc"] $workspace7
+assign [class="MPlayer"] $workspace7
+
+# Floating modifier
+floating_modifier $mod
+
+
+# Terminal emulater
+#bindsym $mod+Return exec urxvt -bg grey17 -fg grey67 -fn "xft:Mono Space:pixelsize=16" +sb -depth 32 -pr white -uc -bc -sl 100000
+bindsym $mod+Return exec xfce4-terminal
+# start a terminal
+#bindsym $mod+Return exec i3-sensible-terminal
+
+
+
+# Kill
+bindsym $mod+Shift+q kill
+
+
+# Launcher
+bindsym $mod+d exec dmenu_run -i
+bindsym $mod+Shift+f exec rofi -show run -lines 6 -eh 2 -width 1366 -padding 300 -opacity 80 -bw 30 -bc "#2f343f" -bg "#2f343f" -fg "#f2f1f4" -hlbg "#2f343f" -hlfg "#887AAC" -font "Vazur 13" #ff0000
+# Change focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+
+# Move window
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+
+# Horizontal split
+bindsym $mod+h split h
+
+
+# Vertical split
+bindsym $mod+v split v
+
+
+# Fullscreen
+bindsym $mod+f fullscreen toggle
+
+
+# Container layout
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+
+# Screen brightness controls
+bindsym XF86MonBrightnessUp exec "xbacklight -inc 10"
+bindsym XF86MonBrightnessDown exec "xbacklight -dec 10"
+
+# lock
+bindsym $mod+i exec i3lock-fancy
+
+
+# Toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+
+# Change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+
+# switch to workspace
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+bindsym $mod+4 workspace $workspace4
+bindsym $mod+5 workspace $workspace5
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace $workspace7
+bindsym $mod+8 workspace $workspace8
+bindsym $mod+9 workspace $workspace9
+bindsym $mod+0 workspace $workspace10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $workspace1
+bindsym $mod+Shift+2 move container to workspace $workspace2
+bindsym $mod+Shift+3 move container to workspace $workspace3
+bindsym $mod+Shift+4 move container to workspace $workspace4
+bindsym $mod+Shift+5 move container to workspace $workspace5
+bindsym $mod+Shift+6 move container to workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace $workspace7
+bindsym $mod+Shift+8 move container to workspace $workspace8
+bindsym $mod+Shift+9 move container to workspace &workspace9
+bindsym $mod+Shift+0 move container to workspace $workspace10
+
+
+
+#screenshot
+#bindsym --release Print exec scrot $HOME/Pictures/screenshot-$(date +%Y-%m-%d_%H-%M-%S).jpg
+# bindsym --release Shift+Print exec scrot -s $HOME/Pictures/screenshot-$(date +%Y-%m-%d_%H-%M-%S).jpg)
+
+bindsym --release Print exec scrot -u '/tmp/%F_%T_$wx$h.png' -e 'xclip -selection clipboard -target image/png -i $f'
+bindsym --release Shift+Print exec scrot '/tmp/%F_%T_$wx$h.png' -e 'xclip -selection clipboard -target image/png -i $f'
+
+
+bindsym $mod+F1 exec chromium --no-sandbox
+bindsym $mod+F2 exec firefox
+bindsym $mod+F3 exec subl3
+bindsym $mod+F4 exec telegram-desktop
+bindsym $mod+F5 exec pcmanfm
+
+# Reload configuration
+bindsym $mod+Shift+c reload
+
+
+# Inplace restart
+bindsym $mod+Shift+r restart
+
+
+# Goodbye! :)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m '' -b 'Exit i3' 'i3-msg exit' -b 'Shutdown' 'shutdown now' -b 'Reboot' 'reboot'"
+
+
+# My shortcuts
+bindsym $mod+Shift+s exec "~/bin/i3-prompt-shortcuts"
+
+
+# Color Class               Border      BG         FG
+client.focused             #1793D0   #1793D0    #FFFFFF
+client.focused_inactive    #000000   #333333    #FFFFFF
+client.unfocused           #000000   #333333    #FFFFFF
+client.urgent              #FF0000   #FF0000    #FF0000
+# bar.focused                #1793D0   #000000    #FFFFFF
+# bar.unfocused              #333333   #000000    #FFFFFF
+# bar.urgent                 #FF0000   #000000    #FF0000
+
+
+# Resize
+mode "resize" {
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+
+# Bar...
+bar {
+    font pango:Vazir 10
+    
+    colors {
+        background #000000
+        statusline #ffffff
+        separator  #00ffff
+    
+        focused_workspace  #3d3d3d #3d3d3d #ffffff
+        active_workspace   #000000 #0000ff #222222
+        inactive_workspace #000000 #000000 #888888
+        urgent_workspace   #2f343a #900000 #ffffff
+        # binding_mode       #2f343a #900000 #ffffff
+    }
+
+    strip_workspace_numbers yes
+    separator_symbol "-"
+    # !REQUIRES i3blocks
+    position bottom
+    #status_command i3status
+    status_command i3blocks
+}
+
+
+
+# For Window ...
+new_window pixel 1
+#for_window [class="Telegram"] floating enable; resize shrink width 10000px; resize grow width 300px; resize shrink height 500px; resize grow height 400px;
+for_window [class="xfce4-terminal"] floating enable; resize shrink width 10000px; resize grow width 300px; resize shrink height 500px; resize grow height 400px;
+
+
+# Startup programs
+#exec --no-startup-id nm-applet
+exec --no-startup-id feh --bg-fill $HOME/Pictures/background.jpg
+exec --no-startup-id setxkbmap -layout us,ir -option 'grp:alt_shift_toggle'
+exec_always compton -b
+exec --no-startup-id chromium
+exec --no-startup-id firefox
+exec --no-startup-id subl3
+exec --no-startup-id telegram-desktop
+exec --no-startup-id thunar
+exec --no-startup-id bash .socks.sh
+exec --no-startup-id xfce4-terminal -e "htop" && "/bin/bash"
+
+exec --no-startup-id virtualbox
+exec --no-startup-id filezilla
+exec --no-startup-id vlc
+
+
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set 'Master' 5%+
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer set 'Master' 5%-
+bindsym XF86AudioMute exec --no-startup-id amixer set 'Master' mute
